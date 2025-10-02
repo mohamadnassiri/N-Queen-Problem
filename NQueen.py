@@ -1,7 +1,7 @@
 import random
 import copy
 import time
-# Index n is number of (non-unique) solutions for n*n board
+
 SOLUTIONS = (1, 1, 0, 0, 2, 10, 4, 40, 92, 352, 724, 2680, 14200, 73712, 365596, 2279184,
              14772512, 95815104, 666090624, 4968057848, 39029188884, 314666222712, 2691008701644,
              24233937684440, 227514171973736, 2207893435808352, 22317699616364044)
@@ -10,20 +10,20 @@ def get_board_size():
     n = int(input("Enter the value of N for the N-Queens problem: "))
     return n
 
-# Backtracking Algorithm
+
 def is_safe(board, row, col, n):
-    # Check the row
+ 
     if any(board[row][j] == 1 for j in range(col)):
         return False
 
-    # Check the upper diagonal
+   
     i, j = row, col
     while i >= 0 and j >= 0:
         if board[i][j] == 1:
             return False
         i, j = i - 1, j - 1
 
-    # Check the lower diagonal
+    
     i, j = row, col
     while i < n and j >= 0:
         if board[i][j] == 1:
@@ -35,8 +35,8 @@ def is_safe(board, row, col, n):
 def solve_backtracking(board, col, n, count):
     if col == n:
         print_board(board, n)
-        count[0] += 1  # Increment count of solutions found
-        return False  # Return False to continue finding solutions
+        count[0] += 1  
+        return False  
 
     for row in range(n):
         if is_safe(board, row, col, n):
@@ -44,33 +44,33 @@ def solve_backtracking(board, col, n, count):
             print(f"Placing a queen at ({row}, {col})")
             print_board(board, n)
 
-            solve_backtracking(board, col + 1, n, count)  # Don't return the result of recursive call
+            solve_backtracking(board, col + 1, n, count)  
 
             board[row][col] = 0
             print(f"Backtracking from ({row}, {col})")
             print_board(board, n)
 
-    return False  # Return False to continue finding solutions
+    return False  
 
 def solve_n_queens_backtracking(n):
     board = [[0 for j in range(n)] for i in range(n)]
     print("\nBacktracking Algorithm:")
-    count = [0]  # Counter to keep track of solutions found
+    count = [0]  
     cont = check_solutions(n, SOLUTIONS)
     if cont == 'y':
         start_time = time.time()
-        solve_backtracking(board, 0, n, count)  # Don't check the result of solve_backtracking
+        solve_backtracking(board, 0, n, count)  
         if count[0] == 0:
             print("No solution found for N =", n)
         else:
             print("Solutions found for N =", n)
         end_time = time.time()
-        execution_time = round(end_time - start_time, 4)  # Round
+        execution_time = round(end_time - start_time, 4)  
         print(f"Time taken to solve: {execution_time} seconds")
         print(f"Problem solved {count[0]} times.")
 
 
-# Genetic Algorithm
+
 def fitness(solution, n):
     attacks = 0
     for i in range(n):
@@ -126,7 +126,7 @@ def solve_n_queens_genetic(n, population_size=100, generations=1000, mutation_ra
     start_time = time.time()
     solution = genetic_algorithm(population_size, n, generations, mutation_rate)
     end_time = time.time()
-    execution_time = round(end_time - start_time, 4)  # Round
+    execution_time = round(end_time - start_time, 4)  
     print("Solution for N =", n)
     for i in range(n):
         row = [''] * n
@@ -140,7 +140,7 @@ def solve_n_queens_genetic(n, population_size=100, generations=1000, mutation_ra
                     row[j] = '□ '
         print(''.join(row))
     print(f"Time taken to solve: {execution_time} seconds")
-# Heuristic Algorithm (Nearest Neighbor)
+
 def count_attacks(solution, row, col, n):
     attacks = 0
     for i in range(col):
@@ -171,7 +171,7 @@ def solve_n_queens_heuristic(n):
     print("Heuristic Algorithm (Nearest Neighbor):")
     solution = nearest_neighbor(n)
     end_time = time.time()
-    execution_time = round(end_time - start_time, 4)  # Round
+    execution_time = round(end_time - start_time, 4)  
     print("Solution for N =", n)
     for i in range(n):
         row = [''] * n
@@ -210,7 +210,7 @@ def check_solutions(n, SOLUTIONS):
     else:
         return 'y'
 
-# Main function
+
 def main():
     n = get_board_size()
     algorithm_choice = input("Choose the algorithm (1 - Backtracking, 2 - Genetic, 3 - Heuristic): ")

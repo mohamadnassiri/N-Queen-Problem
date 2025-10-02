@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        
+        body {
+            background: linear-gradient(135deg, #198754 0%, #28a745 100%);
+            min-height: 100vh;
+        }
+        .board {
+            display: grid;
+            gap: 1px;
+            margin: 10px auto;
+            width: fit-content;
+            border: 1px solid #343a40;
+            grid-template-columns: repeat(var(--n), 30px);
+            grid-template-rows: repeat(var(--n), 30px);
+        }
+        .cell {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .black { background-color: #22c082; }
+        .white { background-color: #f8f9fa; }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: none;
+            z-index: 1000;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .back-to-top:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            border-radius: 15px 15px 0 0 !important;
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+        .card-header i {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header text-white">
+                        <h1 class="h4 mb-2"><i class="fas fa-chess-queen me-2"></i> N-Queens Solutions for N={{ n }}</h1>
+                        <p class="mb-0 ps-1"><i class="fas fa-clock me-2"></i> Execution Time: {{ time }} seconds</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-4 alert alert-info"><i class="fas fa-info-circle"></i> {{ description }}</p>
+                        {% if boards %}
+                            <div class="mb-3">
+                                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#solutions" aria-expanded="true" aria-controls="solutions">
+                                    <i class="fas fa-eye"></i> Toggle Solutions View
+                                </button>
+                            </div>
+                            <div id="solutions" class="collapse show">
+                                <div class="row">
+                                    {% for board in boards %}
+                                        <div class="col-md-4 col-sm-6 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-body text-center">
+                                                    <h5 class="card-title"><i class="fas fa-puzzle-piece me-2"></i> Solution {{ forloop.counter }}</h5>
+                                                    <div class="board" style="--n: {{ n }};">
+                                                        {% for row in board %}
+                                                            {% for cell in row %}
+                                                                <div class="cell {% if forloop.parentloop.counter0|add:forloop.counter0|divisibleby:2 %}white{% else %}black{% endif %}">
+                                                                    {% if cell == 1 %}♕{% endif %}
+                                                                </div>
+                                                            {% endfor %}
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <p class="text-center alert alert-warning"><i class="fas fa-exclamation-triangle"></i> No solution found.</p>
+                        {% endif %}
+                        <div class="text-center mt-3">
+                            <a href="/" class="btn btn-success btn-lg"><i class="fas fa-redo"></i> Try Again</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary back-to-top btn-lg" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.onscroll = function() {
+            const backToTopBtn = document.querySelector('.back-to-top');
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
