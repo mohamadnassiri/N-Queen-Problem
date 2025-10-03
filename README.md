@@ -1,43 +1,76 @@
-# N-Queen Problem
-N Queen Problem (Backtracking, Genetic, Heuristic)
+# N-Queen Problem Web Solver
 
-This Python program implements three different algorithms to solve the N-Queens problem: Backtracking, Genetic Algorithm, and a Heuristic (Nearest Neighbor) Algorithm.
+A **web-based implementation** of the N-Queens problem with a modern glassy dark theme, allowing users to **solve and visualize the N-Queens problem** using different algorithms.
 
-## Table of Contents
+## Features
 
-- [N-Queens Problem](#n-queens-problem)
-- [Algorithms](#algorithms)
- - [Backtracking Algorithm](#backtracking-algorithm)
- - [Genetic Algorithm](#genetic-algorithm)
- - [Heuristic (Nearest Neighbor) Algorithm](#heuristic-nearest-neighbor-algorithm)
-- [How to Use](#how-to-use)
-- [Performance](#performance)
+* Solve the N-Queens problem for any N between 1 and 10.
+* Display all solutions visually and interactively.
+* Choose solving algorithms:
 
-## N-Queens Problem
+  * **Backtracking**: Find all solutions.
+  * **Genetic Algorithm**: Approximate solution using genetic algorithm.
+  * **Heuristic (Nearest Neighbor)**: Use a nearest neighbor heuristic.
+* Modern dark glass-like UI similar to Windows 11.
+* **Toggle Solutions View** button to show/hide solutions.
+* Interactive buttons for **Try Again** and **Back to Top / Down**.
+* Responsive design for mobile and desktop.
+* Beautiful styling for **homepage, forms, chess boards, and solution cards**.
 
-The N-Queens problem is a classic problem in computer science that involves placing N queens on an N×N chessboard such that no two queens attack each other. A solution to the N-Queens problem is a placement of N queens on the chessboard where no two queens share the same row, column, or diagonal.
+## Demo
+
+![Homepage screenshot](screenshots/Home.png)
+![Solutions screenshot](screenshots/Solutions.png)
+
+## Installation & Setup
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/mohamadnassiri/N-Queen-Problem.git
+cd N-Queen-Problem
+```
+
+2. Create and activate a Python virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux / macOS
+venv\Scripts\activate     # Windows
+```
+
+3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Run the server:
+
+```bash
+python manage.py runserver
+```
+
+5. Open your browser and visit:
+
+```
+http://127.0.0.1:8000/
+```
 
 ## Algorithms
 
-### Backtracking Algorithm
+* **Backtracking**: Standard recursive algorithm to find all solutions.
+* **Genetic Algorithm**: Evolutionary algorithm for approximate solution.
+* **Heuristic (Nearest Neighbor)**: Approximate solution using nearest neighbor strategy.
 
-The backtracking algorithm is a recursive approach to solving the N-Queens problem. It places queens on the board one by one, checking for safety at each step. If a safe position is found, the algorithm proceeds to the next queen. If no safe position is available, it backtracks to the previous queen and tries a different position.
+## Technologies Used
 
-### Genetic Algorithm
+* **Python 3.x**
+* **Django** web framework
+* **Bootstrap 5** for responsive UI
+* **FontAwesome** icons
+* Modern CSS with glassy dark theme
 
-The genetic algorithm is an evolutionary algorithm that attempts to solve the N-Queens problem by generating and evolving a population of candidate solutions. It starts with a random population of solutions and iteratively applies genetic operators such as selection, crossover, and mutation to generate new and potentially better solutions.
+## License
 
-### Heuristic (Nearest Neighbor) Algorithm
-
-The heuristic (nearest neighbor) algorithm is a greedy approach that tries to place queens on the board in a way that minimizes the number of attacks between queens. It starts by placing the first queen randomly and then places subsequent queens in the position with the least number of attacks from the previously placed queens.
-
-## How to Use
-
-1. Run the program.
-2. Enter the value of N for the N-Queens problem.
-3. Choose the algorithm you want to use (1 - Backtracking, 2 - Genetic, 3 - Heuristic).
-4. For large values of N (> 8) with the Backtracking algorithm, you will be prompted to confirm if you want to continue, as the number of solutions can be very large.
-   
-## Performance
-
-The performance of the algorithms varies depending on the value of N and the complexity of the problem. The Backtracking algorithm is generally slower for larger values of N, while the Genetic and Heuristic algorithms can provide reasonably good solutions in a shorter time. However, the quality of the solutions may vary.
+This project is licensed under the MIT License.
