@@ -17,6 +17,20 @@ body {
     background-repeat: repeat;
 }
 
+form.d-flex.flex-column.gap-4 .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+form.d-flex.flex-column.gap-4 .form-control,
+form.d-flex.flex-column.gap-4 .form-select {
+    margin-top: 6px; 
+}
+
+form.d-flex.flex-column.gap-4 .d-grid.mt-3 {
+    margin-top: 20px; 
+}
+
 .card {
     border-radius: 20px;
     backdrop-filter: blur(20px) saturate(180%);
@@ -123,22 +137,22 @@ input[type=number].form-control {
     border-radius: 3px;
 }
 
-.btn-primary, .btn-success, .btn {
-    background: rgba(0,112,255,0.25);
-    border: 1px solid rgba(0,112,255,0.6);
-    color: #e5e7eb;
-    border-radius: 12px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+.btn-primary {
+    background: rgba(0,112,255,1);
+    border: 1px solid #0070FF; 
+    color: #ffffff;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     transition: 0.3s ease;
 }
 
-.btn-primary:hover, .btn-success:hover, .btn:hover {
-    background: rgba(0,112,255,0.35);
+.btn-primary:hover{
+    background: #3399ff; 
     border-color: #3399ff;
     color: #ffffff;
     box-shadow: 0 0 12px rgba(0,112,255,0.6);
 }
+
 
 .board {
     display: grid;

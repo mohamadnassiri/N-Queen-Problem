@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,73 +9,91 @@
     <link href="./static/css/all.min.css" rel="stylesheet">
     <link href="./static/css/style.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
                 <div class="card shadow">
-                    <div class="card-header result text-white">
-                        <h1 class="h4 mb-2"><i class="fas fa-chess-queen me-2"></i> N-Queens Solutions for N={{ n }}</h1>
-                        <p class="mb-0 ps-1"><i class="fas fa-clock me-2"></i> Execution Time: {{ time }} seconds</p>
+                    <div class="card-header result text-white d-flex justify-content-between align-items-center">
+                        <div>
+                            <h1 class="h4 mb-2"><i class="fas fa-chess-queen me-2"></i> N-Queens Solutions for N={{ n }}
+                            </h1>
+                            <p class="mb-0 ps-1"><i class="fas fa-clock me-2"></i> Execution Time: {{ time }} seconds
+                            </p>
+                        </div>
                     </div>
                     <div class="card-body">
                         <p class="mb-4 alert alert-info"><i class="fas fa-info-circle"></i> {{ description }}</p>
                         {% if boards %}
-                            <div class="mb-3">
-                                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#solutions" aria-expanded="true" aria-controls="solutions">
-                                    <i class="fas fa-eye"></i> Toggle Solutions View
-                                </button>
-                            </div>
-                            <div id="solutions" class="collapse show">
-                                <div class="row">
-                                    {% for board in boards %}
-                                        <div class="col-md-4 col-sm-6 mb-4">
-                                            <div class="card h-100">
-                                                <div class="card-body text-center">
-                                                    <h5 class="card-title"><i class="fas fa-puzzle-piece me-2"></i> Solution {{ forloop.counter }}</h5>
-                                                    <div class="board" style="--n: {{ n }};">
-                                                        {% for row in board %}
-                                                            {% for cell in row %}
-                                                                <div class="cell {% if forloop.parentloop.counter0|add:forloop.counter0|divisibleby:2 %}white{% else %}black{% endif %}">
-                                                                    {% if cell == 1 %}♕{% endif %}
-                                                                </div>
-                                                            {% endfor %}
-                                                        {% endfor %}
-                                                    </div>
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#solutions" aria-expanded="true" aria-controls="solutions">
+                                <i class="fas fa-eye"></i> Toggle Solutions View
+                            </button>
+                            <a href="/" class="btn btn-primary"><i class="fas fa-redo"></i> Try Again</a>
+                        </div>
+                        <div id="solutions" class="collapse show">
+                            <div class="row">
+                                {% for board in boards %}
+                                <div class="col-md-4 col-sm-6 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title"><i class="fas fa-puzzle-piece me-2"></i> Solution 
+                                              {{ forloop.counter }}</h5>
+                                            <div class="board" style="--n: {{ n }};">
+                                                {% for row in board %}
+                                                {% for cell in row %}
+                                                <div
+                                                    class="cell {% if forloop.parentloop.counter0|add:forloop.counter0|divisibleby:2 %}white{% else %}black{% endif %}">
+                                                    {% if cell == 1 %}♕{% endif %}
                                                 </div>
+                                                {% endfor %}
+                                                {% endfor %}
                                             </div>
                                         </div>
-                                    {% endfor %}
+                                    </div>
                                 </div>
+                                {% endfor %}
                             </div>
-                        {% else %}
-                            <p class="text-center alert alert-warning"><i class="fas fa-exclamation-triangle"></i> No solution found.</p>
-                        {% endif %}
-                        <div class="text-center mt-3">
-                            <a href="/" class="btn btn-success btn-lg"><i class="fas fa-redo"></i> Try Again</a>
                         </div>
+                        {% else %}
+                        <p class="text-center alert alert-warning"><i class="fas fa-exclamation-triangle"></i> No
+                            solution found.</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <button class="btn btn-primary back-to-top btn-lg" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
+
+
+    <button class="btn btn-primary back-to-top btn-lg" id="scrollButton">
+        <i class="fas fa-arrow-down"></i>
     </button>
+
     <script src="./static/js/bootstrap.bundle.min.js"></script>
     <script>
-        window.onscroll = function() {
-            const backToTopBtn = document.querySelector('.back-to-top');
+        const scrollButton = document.getElementById('scrollButton');
+
+        window.onscroll = function () {
             if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                backToTopBtn.style.display = 'block';
+                scrollButton.style.display = 'block';
             } else {
-                backToTopBtn.style.display = 'none';
+                scrollButton.style.display = 'none';
             }
         };
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        scrollButton.onclick = function () {
+            if (window.scrollY < document.body.scrollHeight / 2) {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                scrollButton.innerHTML = '<i class="fas fa-arrow-down"></i>';
+            }
+        };
     </script>
 </body>
+
 </html>
