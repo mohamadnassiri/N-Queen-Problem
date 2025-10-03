@@ -19,8 +19,8 @@ A **web-based implementation** of the N-Queens problem with a modern glassy dark
 
 ## Demo
 
-![Homepage screenshot](screenshots/Home.png)
-![Solutions screenshot](screenshots/Solutions.png)
+![Homepage screenshot](screenshots/Home.jpg)
+![Solutions screenshot](screenshots/Solutions.jpg)
 
 ## Installation & Setup
 
